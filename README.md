@@ -4,7 +4,7 @@
 </div>
 
 ## Problem Solved
-We understood that there was not a feasible option for farmers to help monitor their livestock without the use of equipment that would cost a lot of money and the result was applying Computer Vision and AI to address this problem. Thousands of sheep, cattle, and horses are mutilated every year due to poor means of monitoring. This software detects when a predator is present in the frame, detects the hostility and sends a text message to the farmer using the Twilio API.
+We understood that there was not a feasible option for farmers to help monitor their livestock without the use of equipment that would cost a lot of money; The solution was applying Computer Vision and AI to alert farmers at a moments notice. Thousands of sheep, cattle, and horses are mutilated every year due to poor means of monitoring. This software detects when a predator is present in the frame, detects the hostility and sends a text message to the farmer using the Twilio API.
 
 > Kaczensky, Petra. “Large Carnivore Depredation on Livestock in Europe.” Ursus, vol. 11, 1999, pp. 59–71. JSTOR, www.jstor.org/stable/3872986.
 
