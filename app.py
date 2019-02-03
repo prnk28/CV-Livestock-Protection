@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from twilio.rest import Client
 
 
@@ -9,13 +9,16 @@ client = Client(account_sid, auth_token)
 
 app = Flask(__name__)
 
+# Paramaters Include: phone, hazardName, and animalCount
 @app.route('/alert', methods=['POST'])
 def sendMessage():
     message = client.messages \
                     .create(
-                        body="Join Earth's mightiest heroes. Like Kevin Bacon.",
+                        body='Your ' + str(request.args.get('animalCount', default = 0, type = int)) +
+                        ' animal(s) are facing a threat from '
+                        + request.args.get('hazardName', default = 'None', type = str) + '.',
                         from_='+12403496055',
-                        to='+17033216471'
+                        to=str(request.args.get('phone', default = +17033216471, type = int))
                     )
     return "The Message was sent"
 
