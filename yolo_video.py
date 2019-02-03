@@ -19,13 +19,14 @@ client = Client(account_sid, auth_token)
 
 # initialize parameters
 hazard = 0
+threatDetected = False
 
 # twilio parameters
 def sendMessage():
     message = client.messages \
                     .create(
-                        body='We have found ' + str(hazard) + ' instances of type: '
-                        + 'DOG' + ' presenting a threat to your livestock.',
+                        body='We have found an animal of type: '
+                        + 'FOX' + ' presenting a threat to your livestock.',
                         from_='+12403496055',
 						# specify phone number here
                         to=str('+18572949173')
@@ -167,9 +168,23 @@ while True:
 			cv2.rectangle(frame, (x, y), (x + w, y + h), color, 2)
 			text = "{}: {:.4f}".format(LABELS[classIDs[i]],
 				confidences[i])
-			if 'dog' in text:
-				hazard += 1
-			print(text)
+
+                        if threatDetected:
+                                print("WE DETECTED A THREAT TO YOUR LIVESTOCK")
+			else:
+				print("Normal")
+			if ('dog' in text or 'cat' in text) and not threatDetected:
+				#hazard += 1
+                                threatDetected = True
+				sendMessage()
+				print("WE DETECTED A THREAT TO YOUR LIVESTOCK")
+                        
+			text = text.replace("cat","coyote")
+			text = text.replace("bird","chicken")
+			text = text.replace("dog","fox")
+
+			#print(text)
+
 			cv2.putText(frame, text, (x, y - 5),
 				cv2.FONT_HERSHEY_SIMPLEX, 0.5, color, 2)
 
@@ -194,8 +209,9 @@ while True:
 print("[INFO] cleaning up...")
 
 # check hazard
+'''
 if hazard > 0:
 	sendMessage()
-
+'''
 writer.release()
 vs.release()
