@@ -14,6 +14,8 @@ from twilio.rest import Client
 
 
 # Your Account Sid and Auth Token from twilio.com/console
+account_sid = 'ACfb78325b02e06e7a48e6b7e9508d00fa'
+auth_token = '1cd511db84d6950525e1fb22b38ebb03'
 
 client = Client(account_sid, auth_token)
 
@@ -92,7 +94,7 @@ except:
 while True:
 	# read the next frame from the file
 	(grabbed, frame) = vs.read()
-
+ 
 	# if the frame was not grabbed, then we have reached the end
 	# of the stream
 	if not grabbed:
@@ -203,6 +205,8 @@ while True:
 				elap * total))
 
 	# write the output frame to disk
+        #cv2.imshow("result", frame)
+        #cv2.waitKey(1)
 	writer.write(frame)
 
 # release the file pointers
