@@ -1,7 +1,7 @@
 import twilio_sms
 import fire_detect
 import bgsb
-
+import os
 
 #Download the helper library from https://www.twilio.com/docs/python/install
 from twilio.rest import Client
@@ -13,12 +13,10 @@ def twilio_fcn():
     twilio_sms.send_text('Warning: possible wildfire near you!')
     return render_template('index.html')
 
-@app.route("/fire/<vid_no>", methods=['GET', 'POST'])
-def fire_msg(vid_no):
-    if int(vid_no) % 2 == 0:
-        fire_detect.fire_info(vid_no)
-    else:
-        bgsb.bgsb_info(vid_no)
+@app.route("/fire", methods=['GET', 'POST'])
+def fire_msg():
+    print("Running. . .")
+    os.system("python ../yolo_video.py -i='../videos/fox_chicken_cropped.mp4' -o='../output/chicken-1.avi' -y=yolo-coco")
     return render_template('index.html')
 
 @app.route("/agreement/")
